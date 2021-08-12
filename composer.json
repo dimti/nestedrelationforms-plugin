@@ -1,7 +1,23 @@
 {
-    "name": "dimti/nestedrelationforms-plugin",
+    "name": "dimti/oc-nestedrelationforms-plugin",
     "type": "october-plugin",
-    "description": "No description provided yet...",
+    "description": "Allow work deep relation forms in backend",
+    "keywords": [
+        "october",
+        "cms",
+        "backend",
+        "relation",
+        "forms",
+        "nested",
+        "plugin"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexander Demidov",
+            "email": "demidov@dimti.ru"
+        }
+    ],
     "require": {
         "composer/installers": "~1.0"
     }
