@@ -1,0 +1,22 @@
+<?php
+$relationId = $this->relationGetId();
+$relationFieldSuffix = '-' . ($this->field ?? $relationField);
+?>
+<div
+    id="<?= false !== strstr($relationId, $relationFieldSuffix) ? $relationId : $relationId . $relationFieldSuffix ?>"
+    data-request-data="_relation_field: '<?= $relationField ?>', _relation_extra_config: '<?= e(base64_encode(json_encode($relationExtraConfig))) ?>'"
+    class="relation-behavior relation-view-<?= $relationViewMode ?>">
+
+    <?php if ($toolbar = $this->relationRenderToolbar($relationField)): ?>
+        <!-- Relation Toolbar -->
+        <div id="<?= $this->relationGetId('toolbar') ?>" class="relation-toolbar">
+            <?= $toolbar ?>
+        </div>
+    <?php endif ?>
+
+    <!-- Relation View -->
+    <div id="<?= $this->relationGetId('view') ?>" class="relation-manager">
+        <?= $this->relationRenderView($relationField) ?>
+    </div>
+
+</div>

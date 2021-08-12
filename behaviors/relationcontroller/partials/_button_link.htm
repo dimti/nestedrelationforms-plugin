@@ -1,0 +1,15 @@
+<?php
+$parentRelationModel = $this->getParentRelationModel();
+$parentModelClassName = str_replace('\\', '.', get_class($parentRelationModel));
+$parentModelId = $parentRelationModel->{$parentRelationModel->getKeyName()};
+?>
+<a
+    data-control="popup"
+    data-size="huge"
+    data-handler="onRelationButtonLink"
+    data-request-data="parent_model: '<?= $parentModelClassName ?>'<?= $parentModelId ? ', parent_model_id: ' . $parentRelationModel->{$parentRelationModel->getKeyName()}:'' ?>"
+    href="javascript:;"
+    class="btn btn-sm btn-secondary">
+        <i class="octo-icon-link"></i>
+        <?= e(trans('backend::lang.relation.link_name', ['name'=>trans($relationLabel)])) ?>
+</a>

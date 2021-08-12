@@ -1,0 +1,21 @@
+<?php
+$parentRelationModel = $this->getParentRelationModel();
+$parentModelClassName = str_replace('\\', '.', get_class($parentRelationModel));
+$parentModelId = $parentRelationModel->{$parentRelationModel->getKeyName()};
+?>
+<button
+    disabled
+    class="btn btn-sm btn-secondary"
+    data-request="onRelationButtonUnlink"
+    data-request-success="$.oc.relationBehavior.changed('<?= e($this->vars['relationField']) ?>', 'removed')"
+    data-request-confirm="<?= e(trans('backend::lang.relation.unlink_confirm')) ?>"
+    data-request-data="parent_model: '<?= $parentModelClassName ?>'<?= $parentModelId ? ', parent_model_id: ' . $parentRelationModel->{$parentRelationModel->getKeyName()}:'' ?>"
+    data-trigger-action="enable"
+    data-trigger="#<?= $this->relationGetId('view') ?> .control-list tbody input[type=checkbox]"
+    data-trigger-condition="checked"
+
+    data-stripe-load-indicator
+>
+    <i class="octo-icon-unlink"></i>
+    <?= e(trans('backend::lang.relation.unlink')) ?>
+</button>

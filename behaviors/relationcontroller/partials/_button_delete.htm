@@ -1,0 +1,34 @@
+<?php
+$parentRelationModel = $this->getParentRelationModel();
+$parentModelClassName = str_replace('\\', '.', get_class($parentRelationModel));
+$parentModelId = $parentRelationModel->{$parentRelationModel->getKeyName()};
+?>
+<?php if ($relationViewMode == 'single'): ?>
+    <button
+        class="btn btn-sm btn-secondary oc-icon-trash-o"
+        data-request="onRelationButtonDelete"
+        data-request-data="parent_model: '<?= $parentModelClassName ?>'<?= $parentModelId ? ', parent_model_id: ' . $parentRelationModel->{$parentRelationModel->getKeyName()}:'' ?>"
+        data-request-confirm="<?= e(trans('backend::lang.relation.delete_confirm')) ?>"
+        data-request-success="$.oc.relationBehavior.changed('<?= e($this->vars['relationField']) ?>', 'deleted')"
+        data-stripe-load-indicator>
+        <?= e(trans('backend::lang.relation.delete')) ?>
+    </button>
+<?php else: ?>
+    <button
+        class="btn btn-sm btn-secondary"
+        onclick="$(this).data('request-data', {
+            checked: $('#<?= $this->relationGetId('view') ?> .control-list').listWidget('getChecked')
+        })"
+        disabled="disabled"
+        data-request-data="parent_model: '<?= str_replace('\\', '.', get_class($parentRelationModel)) ?>', parent_model_id: <?=$parentRelationModel->{$parentRelationModel->getKeyName()}?>"
+        data-request="onRelationButtonDelete"
+        data-request-confirm="<?= e(trans('backend::lang.relation.delete_confirm')) ?>"
+        data-request-success="$.oc.relationBehavior.changed('<?= e($this->vars['relationField']) ?>', 'deleted')"
+        data-trigger-action="enable"
+        data-trigger="#<?= $this->relationGetId('view') ?> .control-list tbody input[type=checkbox]"
+        data-trigger-condition="checked"
+        data-stripe-load-indicator>
+            <i class="octo-icon-delete"></i>
+            <?= e(trans('backend::lang.relation.delete')) ?>
+    </button>
+<?php endif ?>
