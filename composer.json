@@ -1,5 +1,5 @@
 {
-    "name": "dimti/oc-nestedrelationforms-plugin",
+    "name": "dimti/nestedrelationforms-plugin",
     "type": "october-plugin",
     "description": "Allow work deep relation forms in backend",
     "keywords": [
